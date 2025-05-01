@@ -33,7 +33,7 @@ const util = require("util");
 const speed = require("performance-now");
 const {
     smsg
-} = require(&#039;./lib/smsg&#039;);
+} = require('./lib/smsg');
 const {
     smsgsmsg,
     formatp,
@@ -147,14 +147,14 @@ async function startMarcus() {
         setInterval(() => {
             const date = new Date();
             client.updateProfileStatus(`
-${botname} is active 24/7\n\n${date.toLocaleString("en-US", { timeZone: "Africa/Nairobi" })} It&#039;s a ${date.toLocaleString("en-US", { weekday: "long", timeZone: "Africa/Nairobi" })}.`
+${botname} is active 24/7\n\n${date.toLocaleString("en-US", { timeZone: "Africa/Nairobi" })} It's a ${date.toLocaleString("en-US", { weekday: "long", timeZone: "Africa/Nairobi" })}.`
             );
         }, 10 * 1000);
     }
     let lastTextTime = 0;
     const messageDelay = 5000;
-    client.ev.on(&#039;call&#039;, async (callData) => {
-        if (anticall === &#039;true&#039;) {
+    client.ev.on('call', async (callData) => {
+        if (anticall === 'true') {
             const callId = callData[0].id;
             const callerId = callData[0].from;
             await client.rejectCall(callId, callerId);
@@ -165,7 +165,7 @@ ${botname} is active 24/7\n\n${date.toLocaleString("en-US", { timeZone: "Africa/
                 });
                 lastTextTime = currentTime;
             } else {
-                console.log(&#039;Message skipped to prevent overflow&#039;);
+                console.log('Message skipped to prevent overflow');
             }
         }
     });
@@ -209,9 +209,9 @@ ${botname} is active 24/7\n\n${date.toLocaleString("en-US", { timeZone: "Africa/
             const userMessage = mek.message.conversation || mek.message.extendedTextMessage?.text;
             const isGroup = sender.endsWith("@g.us");
             console.log(`📩 New message from ${sender}:`, userMessage);
-            if (autoview === &#039;true&#039; && autolike === &#039;true&#039; && mek.key && mek.key.remoteJid === "status@broadcast") {
+            if (autoview === 'true' && autolike === 'true' && mek.key && mek.key.remoteJid === "status@broadcast") {
                 const marcuslike = await client.decodeJid(client.user.id);
-                const emojis = [&#039;😂&#039;, &#039;😥&#039;, &#039;😇&#039;, &#039;🙏&#039;, &#039;💥&#039;, &#039;💯&#039;, &#039;🔥&#039;, &#039;💫&#039;, &#039;👽&#039;, &#039;💗&#039;, &#039;❤️‍🔥&#039;, &#039;👁️&#039;, &#039;👀&#039;, &#039;🙌&#039;, &#039;🙆&#039;, &#039;🌟&#039;, &#039;💧&#039;, &#039;🎇&#039;, &#039;🎆&#039;, &#039;♂️&#039;, &#039;✅&#039;];
+                const emojis = ['😂', '😥', '😇', '🙏', '💥', '💯', '🔥', '💫', '👽', '💗', '❤️‍🔥', '👁️', '👀', '🙌', '🙆', '🌟', '💧', '🎇', '🎆', '♂️', '✅'];
                 const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
                 const delayMessage = 3000;
                 await client.sendMessage(mek.key.remoteJid, {
@@ -237,7 +237,7 @@ ${botname} is active 24/7\n\n${date.toLocaleString("en-US", { timeZone: "Africa/
             const args = body.trim().split(/ +/).slice(1);
             const pushname = m.pushName || "No Name";
             const botNumber = await client.decodeJid(client.user.id);
-            const servBot = botNumber.split(&#039;@&#039;)[0];
+            const servBot = botNumber.split('@')[0];
             const Ghost = "254796299159";
             const Ghost2 = "254110190196";
             const Ghost3 = "2547483876159";
@@ -262,9 +262,9 @@ ${botname} is active 24/7\n\n${date.toLocaleString("en-US", { timeZone: "Africa/
                 return admins || [];
             };
             const Marcus = m.quoted || m;
-            const quoted = Marcus.mtype === &#039;buttonsMessage&#039; ? Marcus[Object.keys(Marcus)[1]] :
-                Marcus.mtype === &#039;templateMessage&#039; ? Marcus.hydratedTemplate[Object.keys(Marcus.hydratedTemplate)[1]] :
-                Marcus.mtype === &#039;product&#039; ? Marcus[Object.keys(Marcus)[0]] : m.quoted ? m.quoted : m;
+            const quoted = Marcus.mtype === 'buttonsMessage' ? Marcus[Object.keys(Marcus)[1]] :
+                Marcus.mtype === 'templateMessage' ? Marcus.hydratedTemplate[Object.keys(Marcus.hydratedTemplate)[1]] :
+                Marcus.mtype === 'product' ? Marcus[Object.keys(Marcus)[0]] : m.quoted ? m.quoted : m;
             const color = (text, color) => {
                 return color ? chalk.keyword(color)(text) : chalk.green(text);
             };
@@ -328,7 +328,7 @@ ${botname} is active 24/7\n\n${date.toLocaleString("en-US", { timeZone: "Africa/
                 Tag
             };
             const forbiddenLinkPattern = /https?:\/\/[^\s]+/;
-            if (body && forbiddenLinkPattern.test(body) && m.isGroup && antilink === &#039;true&#039; && !isOwner && isBotAdmin && !isAdmin) {
+            if (body && forbiddenLinkPattern.test(body) && m.isGroup && antilink === 'true' && !isOwner && isBotAdmin && !isAdmin) {
                 if (itsMe) return;
                 const kid = m.sender;
                 await client.sendMessage(m.chat, {
@@ -352,16 +352,16 @@ ${botname} is active 24/7\n\n${date.toLocaleString("en-US", { timeZone: "Africa/
                         text: ` @${kid.split("@")[0]} _Shared ablink_`,
                     });
                 } else {
-                    await client.groupParticipantsUpdate(m.chat, [kid], &#039;remove&#039;);
+                    await client.groupParticipantsUpdate(m.chat, [kid], 'remove');
                 }
             }
-            const forbiddenWords = [&#039;neiman&#039;, &#039;marcus&#039;, &#039;Marcus&#039;, &#039;Neiman&#039;, &#039;NEIMAN&#039;, &#039;MARCUS&#039;, &#039;@Neiman Marcus&#039;];
+            const forbiddenWords = ['neiman', 'marcus', 'Marcus', 'Neiman', 'NEIMAN', 'MARCUS', '@Neiman Marcus'];
             if (body && forbiddenWords.some(word => body.toLowerCase().includes(word))) {
-                if (m.isGroup && antibad === &#039;true&#039;) {
+                if (m.isGroup && antibad === 'true') {
                     if (isBotAdmin && !isOwner && !isAdmin) {
                         const kid = m.sender;
                         await client.sendMessage(m.chat, {
-                            text: `This Residence Is Evil, Don&#039;t Mention It`,
+                            text: `This Residence Is Evil, Don't Mention It`,
                             contextInfo: {
                                 mentionedJid: [kid]
                             }
@@ -376,12 +376,12 @@ ${botname} is active 24/7\n\n${date.toLocaleString("en-US", { timeZone: "Africa/
                                 participant: kid
                             }
                         });
-                        await client.groupParticipantsUpdate(m.chat, [kid], &#039;remove&#039;);
-                        await client.updateBlockStatus(kid, &#039;block&#039;);
+                        await client.groupParticipantsUpdate(m.chat, [kid], 'remove');
+                        await client.updateBlockStatus(kid, 'block');
                     }
-                } else if (!m.isGroup && antibad === &#039;true&#039;) {
+                } else if (!m.isGroup && antibad === 'true') {
                     const kid = m.sender;
-                    await client.updateBlockStatus(kid, &#039;block&#039;);
+                    await client.updateBlockStatus(kid, 'block');
                 }
             }
             if (cmd && mode === "private" && !itsMe && !isOwner && m.sender !== daddy) return;
